@@ -1,0 +1,212 @@
+[
+  {
+    "title": "Yellow Track Suit",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426640/store/izqwxqbtmldabxqz7rwr.png",
+    "price": 135,
+    "category": "women"
+  },
+  {
+    "title": "Adidas Yeezy",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426640/store/m8qv4za4enuxjboi77fd.png",
+    "price": 280,
+    "category": "sneaker"
+  },
+  {
+    "title": "Floral Dress",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426640/store/ynxai70rqcd2awhdcgnl.png",
+    "price": 80,
+    "category": "women"
+  },
+  {
+    "title": "Air Jordan Limited",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426640/store/klwuipkvonggudxyglga.png",
+    "price": 190,
+    "category": "sneaker"
+  },
+  {
+    "title": "Grey Brim",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426640/store/pqm2iddkcmpdhddhjneg.png",
+    "price": 25,
+    "category": "hat"
+  },
+  {
+    "title": "White Blouse",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426640/store/nxwk5yay5l51v918wwii.png",
+    "price": 20,
+    "category": "women"
+  },
+  {
+    "title": "Grey Jean Jacket",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/whgqgau6tjcr7js8c1cf.png",
+    "price": 90,
+    "category": "jacket"
+  },
+  {
+    "title": "Green Beanie",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/fy06t3ohkllfpg75wvt5.png",
+    "price": 18,
+    "category": "hat"
+  },
+  {
+    "title": "Brown Cowboy",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426640/store/fhbo4cld3faxrfozmyco.png",
+    "price": 35,
+    "category": "hat"
+  },
+  {
+    "title": "Brown Brim",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426640/store/kqg4ybbwmzjzzpr4fsxb.png",
+    "price": 25,
+    "category": "hat"
+  },
+  {
+    "title": "Black Jean Shearling",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426640/store/tqprniajydhh9xmxr8xs.png",
+    "price": 125,
+    "category": "jacket"
+  },
+  {
+    "title": "Striped Sweater",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/jbnx2ldgtqglw3vgwqsu.png",
+    "price": 45,
+    "category": "women"
+  },
+  {
+    "title": "Blue Beanie",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/qihluvflpnqxgcgn2dho.png",
+    "price": 18,
+    "category": "hat"
+  },
+  {
+    "title": "Black Converse",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/psujduaundvu9ue5cwr6.png",
+    "price": 110,
+    "category": "sneaker"
+  },
+  {
+    "title": "Black & White Longsleeve",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426640/store/b2m96nlq9gjijvcqdt5a.png",
+    "price": 25,
+    "category": "men"
+  },
+  {
+    "title": "Camo Down Vest",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/vsspauyygsgbh8rfupcw.png",
+    "price": 325,
+    "category": "men"
+  },
+  {
+    "title": "Nike Red High Tops",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426640/store/hc3byk7rdqdqvnnjnnrz.png",
+    "price": 160,
+    "category": "sneaker"
+  },
+  {
+    "title": "Nike White AirForce",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426640/store/vt2gcd2ximw7jxlaczje.png",
+    "price": 160,
+    "category": "sneaker"
+  },
+  {
+    "title": "Blue Jean Jacket",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426640/store/koxwmvwcqiuvjg9xt30l.png",
+    "price": 90,
+    "category": "jacket"
+  },
+  {
+    "title": "Pink T-shirt",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/wyoojtb8q5hswm8p7cgb.png",
+    "price": 25,
+    "category": "men"
+  },
+  {
+    "title": "Red Beanie",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/cbfuaogf0ma43tfupyns.png",
+    "price": 18,
+    "category": "hat"
+  },
+  {
+    "title": "Brown Shearling",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426640/store/mhe8gqm9hzmd8h24a2el.png",
+    "price": 165,
+    "category": "jacket"
+  },
+  {
+    "title": "Floral Blouse",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/mbyf9rl2kuiavmugu84f.png",
+    "price": 20,
+    "category": "women"
+  },
+  {
+    "title": "Jean Long Sleeve",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/xnbpgdlg3aev9vdbaj7b.png",
+    "price": 40,
+    "category": "men"
+  },
+  {
+    "title": "Adidas NMD",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/ymyuskc7augwli5miefg.png",
+    "price": 220,
+    "category": "sneaker"
+  },
+  {
+    "title": "Blue Tanktop",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/paxrinnq3pb0xjypskyl.png",
+    "price": 25,
+    "category": "women"
+  },
+  {
+    "title": "Wolf Cap",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/cisfvjrag4znuyeaqdbg.png",
+    "price": 14,
+    "category": "hat"
+  },
+  {
+    "title": "Timberlands",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/mftzyb61bib6awmbhe6m.png",
+    "price": 200,
+    "category": "sneaker"
+  },
+  {
+    "title": "Nike Brown High Tops",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426640/store/cgh7p1mhdg0zlygbljyx.png",
+    "price": 160,
+    "category": "sneaker"
+  },
+  {
+    "title": "Burgundy T-shirt",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/bzreuweroxzjnydjcteg.png",
+    "price": 25,
+    "category": "men"
+  },
+  {
+    "title": "Tan Trench",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/sgdaefgf8l1gkkfubfzi.png",
+    "price": 185,
+    "category": "jacket"
+  },
+  {
+    "title": "Red Dots Dress",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/fsspz2pni5m8lymvsxjg.png",
+    "price": 80,
+    "category": "women"
+  },
+  {
+    "title": "Palm Tree Cap",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/osy4se38vlsbley3vlp7.png",
+    "price": 14,
+    "category": "hat"
+  },
+  {
+    "title": "Blue Snapback",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/def2amfczbqg0vfdywnp.png",
+    "price": 16,
+    "category": "hat"
+  },
+  {
+    "title": "Floral T-shirt",
+    "image": "http://res.cloudinary.com/dhqp2dd6b/image/upload/v1621426641/store/igu3gm7iyr2dyvd5okkq.png",
+    "price": 20,
+    "category": "men"
+  }
+]
