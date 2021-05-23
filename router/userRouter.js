@@ -2,6 +2,7 @@ const router = require('express').Router();
 const {
   signup,
   login,
+  signout,
   Me,
   updateMe,
   protect,
@@ -11,6 +12,8 @@ const { getAllUsers } = require('../middlewares/usersController');
 router.post('/signup', signup);
 
 router.post('/login', login);
+
+router.delete('/signout', protect, signout);
 
 router.route('/me').get(protect, Me);
 

@@ -32,7 +32,10 @@ const userSchema = new Schema(
         message: 'password do not match',
       },
     },
-
+    active: {
+      type: Boolean,
+      default: true,
+    },
     passwordChangedAt: Date,
   },
   {
@@ -62,6 +65,12 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, 12);
 
   this.passwordConfirm = undefined;
+  next();
+});
+
+userSchema.pre(/^find/, function (next) {
+  this.find({ active: { $ne: false } });
+
   next();
 });
 

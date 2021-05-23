@@ -56,6 +56,10 @@ const login = async (req, res, next) => {
   }
 };
 
+// const signout =(req,res,next)=>{
+
+// }
+
 const protect = async (req, res, next) => {
   try {
     let token;
@@ -93,6 +97,20 @@ const protect = async (req, res, next) => {
   }
 };
 
+const signout = async (req, res, next) => {
+  try {
+    await User.findByIdAndUpdate(req.user.id, {
+      active: false,
+    });
+
+    res.status(204).json({
+      message: 'signed out successfully',
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const Me = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id);
@@ -108,9 +126,12 @@ const Me = async (req, res, next) => {
 };
 
 const updateMe = async (req, res, next) => {
+  //! filter body
+
   try {
     const updatedDetails = await User.findByIdAndUpdate(req.user.id, req.body, {
       new: true,
+      runValidators: true,
     });
 
     res.status(201).json({
@@ -127,6 +148,7 @@ const updateMe = async (req, res, next) => {
 module.exports = {
   signup,
   login,
+  signout,
   protect,
   Me,
   updateMe,

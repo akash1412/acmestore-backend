@@ -1,21 +1,31 @@
 const transformResults = (data) => {
   const results = {
-    men: [],
-    women: [],
-    hat: [],
-    jacket: [],
-    sneaker: [],
+    men: { type: 'men', data: [] },
+    women: { type: 'women', data: [] },
+    hat: { type: 'hat', data: [] },
+    jacket: { type: 'jacket', data: [] },
+    sneaker: { type: 'sneaker', data: [] },
   };
 
   data.forEach((item) => {
-    results[item.category].push(item);
+    // eslint-disable-next-line node/no-unsupported-features/es-syntax
+    results[item.category].data.push(item);
   });
 
-  for (const [key, value] of Object.entries(results)) {
-    results[key] = value.slice(0, 4);
+  for (const [key, valueObj] of Object.entries(results)) {
+    const d = valueObj.data.slice(0, 4);
+    // eslint-disable-next-line node/no-unsupported-features/es-syntax
+    results[key] = { ...valueObj, data: d };
   }
 
-  return results;
+  const newResult = [];
+
+  // eslint-disable-next-line no-unused-vars
+  Object.entries(results).forEach(([_, prop]) => {
+    newResult.push(prop);
+  });
+
+  return newResult;
 };
 
 module.exports = {
