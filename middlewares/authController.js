@@ -97,6 +97,24 @@ const protect = async (req, res, next) => {
   }
 };
 
+const forgotPassword = async (req, res, next) => {
+  // verify email
+  // create token
+  //send to mailId.
+
+  const { email } = req.body;
+
+  if (!req.body.email) {
+    next('');
+  }
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    next('user does not exist', 401);
+  }
+};
+
 const signout = async (req, res, next) => {
   try {
     await User.findByIdAndUpdate(req.user.id, {
@@ -126,13 +144,31 @@ const Me = async (req, res, next) => {
 };
 
 const updateMe = async (req, res, next) => {
-  //! filter body
+  const filterObj = (reqBody) => {
+    const newReqObj = {};
+
+    const reqArray = Object.keys(reqBody);
+
+    const arr = ['name', 'email', 'photo'];
+
+    arr.forEach((cur) => {
+      if (reqArray.includes(cur)) {
+        newReqObj[cur] = reqBody[cur];
+      }
+    });
+
+    return newReqObj;
+  };
 
   try {
-    const updatedDetails = await User.findByIdAndUpdate(req.user.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const updatedDetails = await User.findByIdAndUpdate(
+      req.user._id,
+      filterObj(req.body),
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
 
     res.status(201).json({
       data: {
@@ -150,6 +186,7 @@ module.exports = {
   login,
   signout,
   protect,
+  forgotPassword,
   Me,
   updateMe,
 };

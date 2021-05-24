@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+// const crypto = require('crypto');
 
 const bcrypt = require('bcryptjs');
 
@@ -58,6 +59,10 @@ userSchema.methods.checkPasswordChange = function (JwtTimeStamp) {
 userSchema.methods.comparePasswords = async function (inputPassword) {
   return await bcrypt.compare(inputPassword, this.password);
 };
+
+// userSchema.methods.createResetPasswordToken=function(){
+//    crypto.createHash('sha256').update()
+// }
 
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return;

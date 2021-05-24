@@ -16,7 +16,7 @@ router.post('/login', login);
 router.delete('/signout', protect, signout);
 
 router.route('/me').get(protect, Me);
-
+//protect,
 router.patch('/updateMe', protect, updateMe);
 
 router.route('/').get(getAllUsers);
