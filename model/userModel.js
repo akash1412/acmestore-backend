@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
-// const crypto = require('crypto');
+const validator = require('validator');
+const crypto = require('crypto');
 
 const bcrypt = require('bcryptjs');
 
@@ -7,12 +8,18 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
+      trim: true,
+      minLength: [5, 'name length must be greater than 5 characters'],
+      maxLength: [20, 'name length should not contain more than 20 characters'],
       required: [true, 'please provide name'],
     },
     email: {
       type: String,
-      required: true,
+      lowercase: true,
+      trim: true,
+      required: [true, 'Please provide email'],
       unique: [true, 'User with this email already exists'],
+      validate: [validator.isEmail, 'Please provide a valid email'],
     },
     photo: {
       type: String,
@@ -22,7 +29,13 @@ const userSchema = new Schema(
       required: true,
       select: false,
     },
-
+    role: {
+      type: String,
+      enum: {
+        values: ['user', 'admin'],
+      },
+      default: 'user',
+    },
     passwordConfirm: {
       type: String,
       required: true,
@@ -37,6 +50,8 @@ const userSchema = new Schema(
       type: Boolean,
       default: true,
     },
+    passwordResetToken: String,
+    passwordResetTokenExpiresIn: Date,
     passwordChangedAt: Date,
   },
   {
@@ -60,9 +75,18 @@ userSchema.methods.comparePasswords = async function (inputPassword) {
   return await bcrypt.compare(inputPassword, this.password);
 };
 
-// userSchema.methods.createResetPasswordToken=function(){
-//    crypto.createHash('sha256').update()
-// }
+userSchema.methods.createResetPasswordToken = function () {
+  const resetToken = crypto.randomBytes(32).toString('hex');
+
+  this.passwordResetToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+
+  this.passwordResetTokenExpiresIn = Date.now() + 10 * 60 * 1000;
+
+  return resetToken;
+};
 
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return;

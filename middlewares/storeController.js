@@ -2,7 +2,7 @@ const Item = require('../model/itemModel');
 const ApiFeature = require('../utils/apiFeature');
 const { transformResults } = require('../utils/helper');
 
-const getAllItems = async (req, res) => {
+const getAllItems = async (req, res, next) => {
   try {
     const Query = new ApiFeature(Item.find(), req.query);
 
@@ -11,17 +11,14 @@ const getAllItems = async (req, res) => {
 
     const allItems = await Features.query;
 
-    res.json({
+    res.status(200).json({
       status: 'success',
       data: {
         items: transformResults(allItems),
       },
     });
   } catch (error) {
-    res.json({
-      status: 'request failed',
-      error,
-    });
+    next(error);
   }
 };
 
@@ -41,7 +38,7 @@ const getCategoryTypes = async (req, res, next) => {
   }
 };
 
-const getItemsByCategory = async (req, res) => {
+const getItemsByCategory = async (req, res, next) => {
   try {
     const { category } = req.params;
 
@@ -55,66 +52,61 @@ const getItemsByCategory = async (req, res) => {
       },
     });
   } catch (error) {
-    res.json({
-      status: 'request failed',
-      error,
-    });
+    next(error);
   }
 };
 
-const getItem = async (req, res) => {
+const getItem = async (req, res, next) => {
   try {
     const item = await Item.findById(req.params.id);
 
-    res.json({
+    res.status(200).json({
       status: 'success',
       data: {
         item,
       },
     });
   } catch (error) {
-    res.json({
-      status: 'failed',
-      error,
-    });
+    next(error);
   }
 };
 
-const createItem = async (req, res) => {
+const createItem = async (req, res, next) => {
   try {
     const newItem = await Item.create(req.body);
 
-    res.json(newItem);
-  } catch (error) {
-    res.json({
-      message: 'error',
+    res.status(201).json({
+      status: 'success',
+      data: { item: newItem },
     });
+  } catch (error) {
+    next(error);
   }
 };
 
-const deleteAllItems = async (req, res) => {
-  await Item.deleteMany();
+const deleteAllItems = async (req, res, next) => {
+  try {
+    await Item.deleteMany();
 
-  res.json({
-    status: 'success',
-    message: 'items deleted successfully',
-  });
+    res.status(204).json({
+      status: 'success',
+      message: 'All Items deleted successfully',
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
-const deleteItem = async (req, res) => {
+const deleteItem = async (req, res, next) => {
   try {
     await Item.findByIdAndDelete(req.params.id);
 
-    res.json({
+    res.status(204).json({
       status: 'success',
       message: 'item deleted successfully',
     });
   } catch (error) {
-    res.json({
-      status: 'failed',
-      message: 'error occured',
-      error,
-    });
+    next(error);
   }
 };
 

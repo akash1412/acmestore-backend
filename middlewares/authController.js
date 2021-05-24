@@ -97,22 +97,35 @@ const protect = async (req, res, next) => {
   }
 };
 
+const restricTo = (admin) => (req, res, next) => {
+  if (!req.user.role === admin) {
+    return next('you do not have acces to this route', 401);
+  }
+
+  next();
+};
+
 const forgotPassword = async (req, res, next) => {
-  // verify email
-  // create token
-  //send to mailId.
+  if (!req.body.email) {
+    return next('please provide email address', 400);
+  }
 
   const { email } = req.body;
-
-  if (!req.body.email) {
-    next('');
-  }
 
   const user = await User.findOne({ email });
 
   if (!user) {
-    next('user does not exist', 401);
+    return next('user does not exist', 401);
   }
+
+  const token = user.createResetPasswordToken();
+
+  await user.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    status: 'success',
+    resetToken: token,
+  });
 };
 
 const signout = async (req, res, next) => {
@@ -186,6 +199,7 @@ module.exports = {
   login,
   signout,
   protect,
+  restricTo,
   forgotPassword,
   Me,
   updateMe,

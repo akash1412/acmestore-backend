@@ -4,6 +4,7 @@ const {
   login,
   signout,
   Me,
+  forgotPassword,
   updateMe,
   protect,
 } = require('../middlewares/authController');
@@ -14,6 +15,8 @@ router.post('/signup', signup);
 router.post('/login', login);
 
 router.delete('/signout', protect, signout);
+
+router.post('/forgot-password', forgotPassword);
 
 router.route('/me').get(protect, Me);
 //protect,
