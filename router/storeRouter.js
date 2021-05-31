@@ -4,8 +4,10 @@ const {
   getAllItems,
   getItemsByCategory,
   getCategoryTypes,
+  getAllItemsSlug,
   createItem,
-  getItem,
+  getItemById,
+  getItemBySlugName,
   deleteItem,
 } = require('../middlewares/storeController');
 // const { protect } = require("../middlewares/auth");
@@ -16,11 +18,15 @@ router.route('/').get(getAllItems).post(createItem);
 
 router.route('/category/:category').get(getItemsByCategory);
 
+router.get('/slugs', getAllItemsSlug);
+
 router.get('/category-types', getCategoryTypes);
 
-router
-  .route('/:id')
-  .get(getItem)
-  .delete(protect, restricTo('admin'), deleteItem);
+router.get('/:slug', getItemBySlugName);
+
+// router
+//   .route('/:id')
+//   .get(getItemById)
+//   .delete(protect, restricTo('admin'), deleteItem);
 
 module.exports = router;

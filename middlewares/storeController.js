@@ -22,6 +22,21 @@ const getAllItems = async (req, res, next) => {
   }
 };
 
+const getAllItemsSlug = async (req, res, next) => {
+  try {
+    const slugs = await Item.find().select('slug');
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        slugs,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const getCategoryTypes = async (req, res, next) => {
   try {
     const AllItems = await Item.find().select('category');
@@ -56,7 +71,21 @@ const getItemsByCategory = async (req, res, next) => {
   }
 };
 
-const getItem = async (req, res, next) => {
+const getItemBySlugName = async (req, res, next) => {
+  try {
+    const item = await Item.findOne({ slug: req.params.slug });
+    res.status(200).json({
+      status: 'success',
+      data: {
+        item,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getItemById = async (req, res, next) => {
   try {
     const item = await Item.findById(req.params.id);
 
@@ -114,7 +143,9 @@ module.exports = {
   getAllItems,
   getItemsByCategory,
   getCategoryTypes,
-  getItem,
+  getAllItemsSlug,
+  getItemBySlugName,
+  getItemById,
   createItem,
   deleteAllItems,
   deleteItem,
