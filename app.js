@@ -31,7 +31,7 @@ mongoose
   .then(() => {
     console.log('connected to DB');
 
-    app.listen(90, () => {
+    app.listen(process.env.PORT || 90, () => {
       console.log('server running on port 90');
     });
   })
