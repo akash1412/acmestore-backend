@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "set NODE_ENV=development && nodemon app.js",
+    "start": "node app.js",
+    "dev": "set NODE_ENV=development && nodemon app.js",
     "start:prod": "set NODE_ENV=production && nodemon app.js"
   },
   "keywords": [],
@@ -34,5 +35,8 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^1.7.0",
     "prettier": "^2.3.0"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   }
 }
