@@ -22,7 +22,7 @@ const signup = async (req, res, next) => {
       status: 'success',
       token,
       data: {
-        name: newUser.name,
+        user: newUser,
       },
     });
   } catch (error) {
@@ -48,7 +48,7 @@ const login = async (req, res, next) => {
       status: 'success',
       token: signToken(user._id),
       data: {
-        name: user.name,
+        user: user,
       },
     });
   } catch (error) {
@@ -56,9 +56,19 @@ const login = async (req, res, next) => {
   }
 };
 
-// const signout =(req,res,next)=>{
+const signout = async (req, res, next) => {
+  try {
+    await User.findByIdAndUpdate(req.user.id, {
+      active: false,
+    });
 
-// }
+    res.status(204).json({
+      message: 'signed out successfully',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 const protect = async (req, res, next) => {
   try {
@@ -126,20 +136,6 @@ const forgotPassword = async (req, res, next) => {
     status: 'success',
     resetToken: token,
   });
-};
-
-const signout = async (req, res, next) => {
-  try {
-    await User.findByIdAndUpdate(req.user.id, {
-      active: false,
-    });
-
-    res.status(204).json({
-      message: 'signed out successfully',
-    });
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 const Me = async (req, res, next) => {

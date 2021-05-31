@@ -24,6 +24,7 @@ const itemSchema = new Schema(
     },
     category: {
       type: String,
+      required:true,
       enum: {
         values: ['men', 'women', 'hat', 'jacket', 'sneaker'],
         message: '{VALUE} is not supported',
