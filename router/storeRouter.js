@@ -1,16 +1,16 @@
 const { Router } = require('express');
 const { restricTo, protect } = require('../middlewares/authController');
+
 const {
   getAllItems,
   getItemsByCategory,
   getCategoryTypes,
   getAllItemsSlug,
   createItem,
-  getItemById,
+  updateItemBySlug,
   getItemBySlugName,
-  deleteItem,
+  deleteItemSlug,
 } = require('../middlewares/storeController');
-// const { protect } = require("../middlewares/auth");
 
 const router = Router();
 
@@ -18,11 +18,13 @@ router.route('/').get(getAllItems).post(createItem);
 
 router.route('/category/:category').get(getItemsByCategory);
 
-router.get('/slugs', getAllItemsSlug);
-
 router.get('/category-types', getCategoryTypes);
 
+router.get('/slugs', getAllItemsSlug);
+
 router.get('/:slug', getItemBySlugName);
+
+router.route('/:slug').patch(updateItemBySlug).delete(deleteItemSlug);
 
 // router
 //   .route('/:id')

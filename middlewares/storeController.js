@@ -113,6 +113,24 @@ const createItem = async (req, res, next) => {
   }
 };
 
+const updateItemBySlug = async (req, res, next) => {
+  try {
+    const updatedItem = await Item.findOneAndUpdate(
+      { slug: req.params.slug },
+      req.body,
+      { runValidators: true, new: true }
+    );
+    res.status(200).json({
+      status: 'success',
+      data: {
+        item: updatedItem,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const deleteAllItems = async (req, res, next) => {
   try {
     await Item.deleteMany();
@@ -126,9 +144,9 @@ const deleteAllItems = async (req, res, next) => {
   }
 };
 
-const deleteItem = async (req, res, next) => {
+const deleteItemSlug = async (req, res, next) => {
   try {
-    await Item.findByIdAndDelete(req.params.id);
+    await Item.findOneAndDelete({ slug: req.params.slug });
 
     res.status(204).json({
       status: 'success',
@@ -147,6 +165,7 @@ module.exports = {
   getItemBySlugName,
   getItemById,
   createItem,
+  updateItemBySlug,
   deleteAllItems,
-  deleteItem,
+  deleteItemSlug,
 };
