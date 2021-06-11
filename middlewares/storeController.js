@@ -1,63 +1,13 @@
 const Item = require('../model/itemModel');
-const ApiFeature = require('../utils/apiFeature');
-const { transformResults } = require('../utils/helper');
 
 const getAllItems = async (req, res, next) => {
   try {
-    const Query = new ApiFeature(Item.find(), req.query);
+    // eslint-disable-next-line prefer-const
+    let Query = {};
 
-    const Features = Query;
-    // .paginate().sort().limitFields();
+    if (req.query.category) Query.category = req.query.category;
 
-    const allItems = await Features.query;
-
-    res.status(200).json({
-      status: 'success',
-      data: {
-        items: transformResults(allItems),
-      },
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-const getAllItemsSlug = async (req, res, next) => {
-  try {
-    const slugs = await Item.find().select('slug');
-
-    res.status(200).json({
-      status: 'success',
-      data: {
-        slugs,
-      },
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-const getCategoryTypes = async (req, res, next) => {
-  try {
-    const AllItems = await Item.find().select('category');
-
-    const categoryTypes = [...new Set(AllItems.map((item) => item.category))];
-
-    res.status(200).json({
-      data: {
-        types: categoryTypes,
-      },
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-const getItemsByCategory = async (req, res, next) => {
-  try {
-    const { category } = req.params;
-
-    const items = await Item.find({ category });
+    const items = await Item.find(Query);
 
     res.status(200).json({
       status: 'success',
@@ -81,22 +31,8 @@ const getItemBySlugName = async (req, res, next) => {
       },
     });
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
-  }
-};
-
-const getItemById = async (req, res, next) => {
-  try {
-    const item = await Item.findById(req.params.id);
-
-    res.status(200).json({
-      status: 'success',
-      data: {
-        item,
-      },
-    });
-  } catch (error) {
-    next(error);
   }
 };
 
@@ -159,11 +95,7 @@ const deleteItemSlug = async (req, res, next) => {
 
 module.exports = {
   getAllItems,
-  getItemsByCategory,
-  getCategoryTypes,
-  getAllItemsSlug,
   getItemBySlugName,
-  getItemById,
   createItem,
   updateItemBySlug,
   deleteAllItems,
