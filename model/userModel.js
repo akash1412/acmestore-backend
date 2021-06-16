@@ -50,14 +50,28 @@ const userSchema = new Schema(
       type: Boolean,
       default: true,
     },
+
     passwordResetToken: String,
     passwordResetTokenExpiresIn: Date,
     passwordChangedAt: Date,
   },
   {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
     timestamps: true,
   }
 );
+
+userSchema.virtual('cartItems', {
+  ref: 'Cart',
+  foreignField: 'user',
+  localField: '_id',
+});
+
+userSchema.pre(/^find/, function (next) {
+  this.populate({ path: 'cartItems' });
+  next();
+});
 
 userSchema.methods.checkPasswordChange = function (JwtTimeStamp) {
   if (this.passwordChangedAt) {

@@ -39,6 +39,8 @@ const login = async (req, res, next) => {
     }
 
     const user = await User.findOne({ email }).select('+password');
+
+    console.log(user);
     // !(await bcrypt.compare(password, user.password))
     if (!user || !user.comparePasswords(password)) {
       return next(new AppError('Incorrect email or password', 400));
@@ -87,19 +89,31 @@ const protect = async (req, res, next) => {
       );
     }
 
-    const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+    const isCustomAuth = token.length < 500;
 
-    const currentUser = await User.findById(decoded.id);
+    if (isCustomAuth) {
+      const decoded = await jwt.verify(token, process.env.JWT_SECRET);
 
-    if (!currentUser) {
-      return next(new AppError('user does not exists', 401));
+      const currentUser = await User.findById(decoded.id);
+
+      if (!currentUser) {
+        return next(new AppError('user does not exists', 401));
+      }
+
+      if (currentUser.checkPasswordChange(decoded.iat)) {
+        return next(new AppError('token expired', 400));
+      }
+
+      req.user = currentUser;
+    } else {
+      // google API Token
+
+      const googleIdDetails = jwt.decode(token);
+
+      const user = await User.findOne({ email: googleIdDetails.email });
+
+      req.user = user;
     }
-
-    if (currentUser.checkPasswordChange(decoded.iat)) {
-      return next(new AppError('token expired', 400));
-    }
-
-    req.user = currentUser;
 
     next();
   } catch (error) {

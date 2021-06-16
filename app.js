@@ -5,6 +5,7 @@ const { config } = require('dotenv');
 
 const storeRouter = require('./router/storeRouter');
 const userRouter = require('./router/userRouter');
+const cartRouter = require('./router/cartRouter');
 const globalErrorHandling = require('./middlewares/errorController');
 
 config();
@@ -17,6 +18,8 @@ app.use(express.json());
 app.use('/api/v1/store', storeRouter);
 
 app.use('/api/v1/users', userRouter);
+
+app.use('/api/v1/cart', cartRouter);
 
 app.use(globalErrorHandling);
 
