@@ -50,7 +50,11 @@ const login = async (req, res, next) => {
       status: 'success',
       token: signToken(user._id),
       data: {
-        user: user,
+        user: {
+          name:user.name,
+          photo:user.photo,
+          role:user.role
+        },
       },
     });
   } catch (error) {
