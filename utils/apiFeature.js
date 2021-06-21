@@ -1,4 +1,4 @@
-class ApiFeature {
+class APIFeature {
   constructor(queryObj, queryStr) {
     this.query = queryObj;
     this.queryStr = queryStr;
@@ -7,10 +7,10 @@ class ApiFeature {
   sort() {
     if (this.queryStr.sort) {
       const sort = this.queryStr.sort.split(',').join(' ');
-      console.log(sort);
+
       this.query = this.query.sort(sort);
     } else {
-      this.query = this.query.sort('-__v');
+      this.query = this.query.sort('-price');
     }
 
     return this;
@@ -40,4 +40,4 @@ class ApiFeature {
   }
 }
 
-module.exports = ApiFeature;
+module.exports = APIFeature;
