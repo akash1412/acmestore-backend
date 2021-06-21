@@ -2,9 +2,7 @@ const Cart = require('../model/cartModel');
 
 const getUserCartItems = async (req, res, next) => {
   try {
-    const cartItems = await Cart.find({ user: req.user.id }).select(
-      '-user -itemID'
-    );
+    const cartItems = await Cart.find({ user: req.user.id });
 
     res.status(200).json({
       status: 'success',
