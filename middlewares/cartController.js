@@ -2,7 +2,9 @@ const Cart = require('../model/cartModel');
 
 const getUserCartItems = async (req, res, next) => {
   try {
-    const cartItems = await Cart.find({ user: req.user.id });
+    const cartItems = await Cart.find({ user: req.user.id }).select(
+      '-user -itemID'
+    );
 
     res.status(200).json({
       status: 'success',
@@ -17,7 +19,7 @@ const getUserCartItems = async (req, res, next) => {
 
 const addOrUpdateCartItem = async (req, res, next) => {
   try {
-    if (!req.body.user) req.body.user = req.user.id;
+    if (!req.body.user) req.body.user = req.user._id;
 
     let item;
     // check f the product already exits in cart, if yes then increase quantity
@@ -33,6 +35,10 @@ const addOrUpdateCartItem = async (req, res, next) => {
     res.status(201).json({
       status: 'success',
       message: 'Item added to cart',
+
+      data: {
+        item,
+      },
     });
   } catch (error) {
     next(error);

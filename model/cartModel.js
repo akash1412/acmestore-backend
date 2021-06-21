@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const cartSchema = new mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
       required: [true, 'A cart item must have a name'],
     },
@@ -22,7 +22,7 @@ const cartSchema = new mongoose.Schema(
     itemID: {
       type: mongoose.Schema.ObjectId,
       ref: 'Item',
-      required: [true, 'A Cart product must have a id'],
+      required: [true, 'A Cart item must have a id'],
     },
     user: {
       type: mongoose.Schema.ObjectId,
