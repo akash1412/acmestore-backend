@@ -4,7 +4,11 @@ const APIFeature = require('../utils/apiFeature');
 const getAllItems = async (req, res, next) => {
   try {
     // eslint-disable-next-line prefer-const
-    let feature = new APIFeature(Item.find(), req.query).paginate();
+    const totalDocuments = await Item.countDocuments();
+
+    const feature = new APIFeature(Item.find(), req.query, totalDocuments)
+      .filter()
+      .paginate();
 
     const items = await feature.query;
 
@@ -12,7 +16,8 @@ const getAllItems = async (req, res, next) => {
       status: 'success',
       data: {
         total: items.length,
-        items,
+        curPage: req.query.page || 1,
+        prevPage: items,
       },
     });
   } catch (error) {

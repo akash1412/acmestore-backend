@@ -1,4 +1,5 @@
 const Cart = require('../model/cartModel');
+const AppError = require('../utils/appError');
 
 const getUserCartItems = async (req, res, next) => {
   try {
@@ -21,6 +22,9 @@ const addOrUpdateCartItem = async (req, res, next) => {
 
     let item;
     // check f the product already exits in cart, if yes then increase quantity
+    // here using finOne with itemID,because we don't know if the product exists already in the cart or not,
+    //so in order to search with unique id we use itemID
+
     item = await Cart.findOne({ itemID: req.body.itemID });
     if (item) {
       item.quantity += 1;
@@ -43,6 +47,37 @@ const addOrUpdateCartItem = async (req, res, next) => {
   }
 };
 
+const updateCartItemQuantity = async (req, res, next) => {
+  try {
+    const type = req.body.type.trim();
+
+    // if type !== 'DEC' || 'INC' , thow error;
+
+    if (type !== 'DEC' && type !== 'INC') {
+      return next(new AppError('Invalid type, only "DEC" & "INC" ', 400));
+    }
+
+    let item = await Cart.findOne({ _id: req.params.id });
+
+    if (type === 'INC') {
+      item.quantity += 1;
+    }
+
+    if (type === 'DEC') {
+      item.quantity -= 1;
+    }
+
+    await item.save();
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Item quantity updated',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const deleteCartItem = async (req, res, next) => {
   try {
     await Cart.findByIdAndDelete(req.params.id);
@@ -59,5 +94,6 @@ const deleteCartItem = async (req, res, next) => {
 module.exports = {
   getUserCartItems,
   addOrUpdateCartItem,
+  updateCartItemQuantity,
   deleteCartItem,
 };
