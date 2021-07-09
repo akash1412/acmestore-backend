@@ -1,7 +1,11 @@
 class APIFeature {
-  constructor(queryObj, queryStr) {
+  constructor(queryObj, queryStr, totalDocuments) {
     this.query = queryObj;
     this.queryStr = queryStr;
+    this.totalDocuments = totalDocuments;
+    this.hasPrevPage = false;
+    this.hasNextPage = false;
+    this.curPage = 0;
   }
 
   sort() {
@@ -22,8 +26,26 @@ class APIFeature {
 
     const skip = (page - 1) * limit;
 
+    if (page >= 1) {
+      this.hasPrevPage = false;
+    }
+    this.curPage = page;
+
+    const check = this.totalDocuments / (this.curPage + 1);
+
     this.query = this.query.skip(skip).limit(limit);
 
+    return this;
+  }
+
+  filter() {
+    const filter = this.queryStr.category;
+
+    if (this.queryStr.category) {
+      this.query = this.query.find({ category: filter });
+    }
+
+    //
     return this;
   }
 

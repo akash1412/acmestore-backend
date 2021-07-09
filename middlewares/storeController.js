@@ -6,18 +6,22 @@ const getAllItems = async (req, res, next) => {
     // eslint-disable-next-line prefer-const
     const totalDocuments = await Item.countDocuments();
 
-    const feature = new APIFeature(Item.find(), req.query, totalDocuments)
-      .filter()
-      .paginate();
+    const feature = new APIFeature(
+      Item.find(),
+      req.query,
+      totalDocuments
+    ).paginate();
 
     const items = await feature.query;
+
+    console.log('called');
 
     res.status(200).json({
       status: 'success',
       data: {
         total: items.length,
-        curPage: req.query.page || 1,
-        prevPage: items,
+        // curPage: req.query.page || 1,
+        items: items,
       },
     });
   } catch (error) {
