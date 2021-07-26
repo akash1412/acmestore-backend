@@ -4,17 +4,8 @@ const APIFeature = require('../utils/apiFeature');
 const getAllItems = async (req, res, next) => {
   try {
     // eslint-disable-next-line prefer-const
-    const totalDocuments = await Item.countDocuments();
 
-    const feature = new APIFeature(
-      Item.find(),
-      req.query,
-      totalDocuments
-    ).paginate();
-
-    const items = await feature.query;
-
-    console.log('called');
+    const items = await Item.find({ category: req.query.category });
 
     res.status(200).json({
       status: 'success',

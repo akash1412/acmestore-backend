@@ -14,6 +14,8 @@ const router = Router();
 
 router.route('/').get(getAllItems).post(createItem);
 
+
+
 router.get('/:slug', getItemBySlugName);
 
 router.route('/:slug').patch(updateItemBySlug).delete(deleteItemSlug);
