@@ -1,5 +1,4 @@
 const Item = require('../model/itemModel');
-const APIFeature = require('../utils/apiFeature');
 
 const getAllItems = async (req, res, next) => {
   try {

@@ -14,15 +14,11 @@ const router = Router();
 
 router.route('/').get(getAllItems).post(createItem);
 
-
-
 router.get('/:slug', getItemBySlugName);
 
-router.route('/:slug').patch(updateItemBySlug).delete(deleteItemSlug);
-
-// router
-//   .route('/:id')
-//   .get(getItemById)
-//   .delete(protect, restricTo('admin'), deleteItem);
+router
+  .route('/:slug')
+  .patch(protect, updateItemBySlug)
+  .delete(protect, deleteItemSlug);
 
 module.exports = router;
