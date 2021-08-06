@@ -3,15 +3,18 @@ const APIFeature = require('../utils/apiFeature');
 
 const getAllItems = async (req, res, next) => {
   try {
-    // eslint-disable-next-line prefer-const
+    let items;
 
-    const items = await Item.find({ category: req.query.category });
+    if (req.query.category) {
+      items = await Item.find({ category: req.query.category });
+    } else {
+      items = await Item.find();
+    }
 
     res.status(200).json({
       status: 'success',
       data: {
         total: items.length,
-        // curPage: req.query.page || 1,
         items: items,
       },
     });
