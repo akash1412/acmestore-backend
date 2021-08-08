@@ -44,22 +44,22 @@ app.post('/api/v1/checkout', async (req, res) => {
       payment_method_types: ['card'],
       mode: 'payment',
       line_items: req.body.items.map((item) => {
-        const storeItem = storeItems.get(item.id);
         return {
           price_data: {
             currency: 'usd',
             product_data: {
-              name: storeItem.name,
-              image: storeItem.image,
+              name: item.name,
+              image: item.image,
             },
-            unit_amount: storeItem.priceInCents,
+            unit_amount: item.price * 100,
           },
           quantity: item.quantity,
         };
       }),
-      success_url: `https://localhost:3000/checkout/`,
-      cancel_url: `https://localhost:3000/`,
+      success_url: `http://localhost:3000/`,
+      cancel_url: `http://localhost:3000/`,
     });
+
     res.json({ url: session.url });
   } catch (e) {
     res.status(500).json({ error: e.message });
