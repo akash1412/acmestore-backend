@@ -18,7 +18,7 @@ router.get('/:slug', getItemBySlugName);
 
 router
   .route('/:slug')
-  .patch(protect, updateItemBySlug)
-  .delete(protect, deleteItemSlug);
+  .patch(protect,restricTo('admin') ,updateItemBySlug)
+  .delete(protect, restricTo('admin'), deleteItemSlug);
 
 module.exports = router;
