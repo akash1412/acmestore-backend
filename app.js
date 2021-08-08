@@ -2,12 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const { config } = require('dotenv');
-const stripe = require('stripe')('sk_test_Mrw2gvyQKQ3y0GBayGPBbzqg00MwP3eQ6R');
 
 const storeRouter = require('./router/storeRouter');
 const userRouter = require('./router/userRouter');
 const cartRouter = require('./router/cartRouter');
 const globalErrorHandling = require('./middlewares/errorController');
+const stripe = require('stripe')('sk_test_Mrw2gvyQKQ3y0GBayGPBbzqg00MwP3eQ6R');
 
 config();
 
@@ -15,7 +15,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:3000/',
   })
 );
 app.use(express.json());
@@ -26,7 +26,7 @@ app.use('/api/v1/users', userRouter);
 
 app.use('/api/v1/cart', cartRouter);
 
-app.post('/api/v1/checkout', (req, res) => {
+app.post('/api/v1/checkout', async (req, res) => {
   // const body={
   //   source:req.body.token.id,
   //   amount:req.body.amount,
