@@ -18,6 +18,6 @@ router
   .patch(protect, updateCartItemQuantity)
   .delete(protect, deleteCartItem);
 
-router.delete('/all/clearAll').delete(protect, clearCartItems);
+router.route('/all/clearAll').delete(protect, clearCartItems);
 
 module.exports = router;
