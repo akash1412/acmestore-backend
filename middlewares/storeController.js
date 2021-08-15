@@ -11,9 +11,8 @@ const getAllItems = async (req, res, next) => {
 
     res.status(200).json({
       status: 'success',
-      data: {
-        items: transformResults(items),
-      },
+
+      data: transformResults(items),
     });
   } catch (error) {
     next(error);
