@@ -1,14 +1,30 @@
 const Item = require('../model/itemModel');
+const { transformResults } = require('../utils/helper');
 
 const getAllItems = async (req, res, next) => {
   try {
-    let items;
+    // if (req.query.category) {
+    //   items = await Item.find({ category: req.query.category });
+    // } else {
+    const items = await Item.find();
+    // }
 
-    if (req.query.category) {
-      items = await Item.find({ category: req.query.category });
-    } else {
-      items = await Item.find();
-    }
+    res.status(200).json({
+      status: 'success',
+      data: {
+        items: transformResults(items),
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getItemsByCategory = async (req, res) => {
+  try {
+    const { category } = req.params;
+
+    const items = await Item.find({ category });
 
     res.status(200).json({
       status: 'success',
@@ -18,7 +34,7 @@ const getAllItems = async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 };
 
@@ -96,6 +112,7 @@ const deleteItemSlug = async (req, res, next) => {
 
 module.exports = {
   getAllItems,
+  getItemsByCategory,
   getItemBySlugName,
   createItem,
   updateItemBySlug,

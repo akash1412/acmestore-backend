@@ -3,7 +3,7 @@ const { restricTo, protect } = require('../middlewares/authController');
 
 const {
   getAllItems,
-
+getItemsByCategory,
   createItem,
   updateItemBySlug,
   getItemBySlugName,
@@ -13,6 +13,8 @@ const {
 const router = Router();
 
 router.route('/').get(getAllItems).post(createItem);
+
+router.get('/category/:category',getItemsByCategory)
 
 router.get('/:slug', getItemBySlugName);
 
