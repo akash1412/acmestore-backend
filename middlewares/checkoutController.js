@@ -1,7 +1,6 @@
-const Cart = require('../model/cartModel');
 const stripe = require('stripe')('sk_test_Mrw2gvyQKQ3y0GBayGPBbzqg00MwP3eQ6R');
 
-const CartCheckout = async (req, res) => {
+const Checkout = async (req, res) => {
   // checkout type
   // if type cart , get user id , return from res
 
@@ -10,14 +9,12 @@ const CartCheckout = async (req, res) => {
       payment_method_types: ['card'],
       mode: 'payment',
       line_items: req.body.items.map((item) => {
-        console.log('called');
-        console.log(item);
         return {
           price_data: {
             currency: 'usd',
             product_data: {
               name: item.name,
-              // images: item?.image,
+              images: [item?.image],
             },
             unit_amount: item.price * 100,
           },
@@ -27,8 +24,6 @@ const CartCheckout = async (req, res) => {
       success_url: `${process.env.CLIENT_URL}/checkout/success?type=${req.body.checkoutType}`,
       cancel_url: `${process.env.CLIENT_URL}/checkout/fail`,
     });
-
-    console.log(session.url);
 
     res.status(200).json({
       url: session.url,
@@ -40,4 +35,4 @@ const CartCheckout = async (req, res) => {
   }
 };
 
-module.exports = CartCheckout;
+module.exports = Checkout;

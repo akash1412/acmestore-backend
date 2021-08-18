@@ -7,7 +7,7 @@ const storeRouter = require('./router/storeRouter');
 const userRouter = require('./router/userRouter');
 const cartRouter = require('./router/cartRouter');
 const globalErrorHandling = require('./middlewares/errorController');
-const CartCheckout = require('./middlewares/checkoutController');
+const Checkout = require('./middlewares/checkoutController');
 const { protect } = require('./middlewares/authController');
 const search = require('./middlewares/search');
 
@@ -24,7 +24,7 @@ app.use('/api/v1/users', userRouter);
 
 app.use('/api/v1/cart', cartRouter);
 
-app.use('/api/v1/checkout', protect, CartCheckout);
+app.use('/api/v1/checkout', protect, Checkout);
 
 app.use('/api/v1/search', search);
 
